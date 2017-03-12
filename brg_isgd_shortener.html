@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Encurtar URL</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+</head>
+<body>
+<input type="text" id="original" value="" placeholder="URL para encurtar"><button id="encurtar">Encurtar URL</button>
+<div id="url"></div>
+<script>
+	jQuery(document).ready(function(){
+		$('#encurtar').on('click',function(){
+			var original = $("#original").val();
+			$.getJSON( "http://is.gd/create.php?callback=?", {
+				url: original,
+				format: "json"
+			}).done(function( data ) {
+				alert (original);
+				console.log(data);
+				$("#url").html("Essa URL encurtada é <a href='"+data.shorturl+"'>"+data.shorturl+"</a>");
+			});
+		});
+	});
+</script>
